@@ -1,16 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App/App.jsx';
-import reportWebVitals from './reportWebVitals';
+import App from './components/App/App';
+import {logger} from 'redux-logger';
 
 
-ReactDOM.render(
-    <App />,
-  document.getElementById('react-root'),
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+
+//Reducers
+const busRoutesReducer = (state = [], action) => {
+  if (action.type === "GET_BUS_ROUTES") {
+    return action.payload;
+  }
+  return state;
+};
+
+const store = createStore(
+  combineReducers({
+  // tells the saga middleware to use the rootReducer
+  // rootSaga contains all of our other reducers
+  busRoutesReducer,
+  }),
+  applyMiddleware(logger)
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('react-root'),
+);

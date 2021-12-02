@@ -1,3 +1,4 @@
+import BusRoutes from '../BusRoutes/BusRoutes';
 import './App.css';
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
       <header className="App-header">
         Target Transit
       </header>
+      <BusRoutes />
     </div>
   );
 }
