@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 //Reducers
 const busRoutesReducer = (state = [], action) => {
   if (action.type === "GET_BUS_ROUTES") {
+    console.log("This busRoutesReducer" + action.payload);
     return action.payload;
   }
   return state;

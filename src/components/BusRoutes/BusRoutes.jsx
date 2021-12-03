@@ -14,10 +14,12 @@ const BusRoutes = () => {
   const dispatch = useDispatch();
   const busRoutes = useSelector((store) => store.busRoutesReducer);
 
+  const API_URI = 'http://localhost:5000'
+  
   const getBusRoutes = () => {
     axios({
         method: "GET",
-        url: '/api/busRoutes/getAllRoutes',
+        url: `${API_URI}/api/busRoutes/getAllRoutes`,
       })
       .then((response) => {
         console.log(response.data);
@@ -27,7 +29,7 @@ const BusRoutes = () => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        console.log("This error"+error);
       });
   };
 
