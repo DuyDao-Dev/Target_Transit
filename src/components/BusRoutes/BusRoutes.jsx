@@ -2,25 +2,31 @@ import axios from "axios";
 import React from "react";
 // import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+// import * as React from "react";
 
 const BusRoutes = () => {
-  
   useEffect(() => {
     getBusRoutes();
   }, []);
 
   // const [busRoute, setBusRoute] = useState([]);
   const dispatch = useDispatch();
+  const [selectBusRoute, setSelectBusRoute] = useState([]);
   const busRoutes = useSelector((store) => store.busRoutesReducer);
 
-  const API_URI = 'http://localhost:5000'
-  
+  const API_URI = "http://localhost:5000";
+
   const getBusRoutes = () => {
     axios({
-        method: "GET",
-        url: `${API_URI}/api/busRoutes/getAllRoutes`,
-      })
+      method: "GET",
+      url: `${API_URI}/api/busRoutes/getAllRoutes`,
+    })
       .then((response) => {
         console.log(response.data);
         dispatch({
@@ -29,32 +35,37 @@ const BusRoutes = () => {
         });
       })
       .catch((error) => {
-        console.log("This error"+error);
+        console.log("This error" + error);
       });
   };
 
-  // const handleChange = (e) => {
-  //   setRoute(e.target.value);
-  //   dispatch({ type: "SET_ROUTE", payload: e.target.value });
-  // };
-console.log(busRoutes);
+  const handleChange = (e) => {
+    setSelectBusRoute(e.target.value);
+    dispatch({ type: "SET_BUS_ROUTE", payload: e.target.value });
+  };
+
+  console.log(busRoutes);
+  console.log(selectBusRoute);
 
   return (
-    <div>
-      {/* react drop down menu */}
-      {/* need to map over the bus routes and display them in the drop down menu */}
-      {/* {busRoutes &&
-        busRoutes.map((routes, index) => {
-          return (
-            <div key={index}>
-              <select onChange={handleChange}>
-                <option value={routes}>{routes}</option>
-              </select>
-            </div>
-          );
-        })} */}
-    </div>
+    <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Select Route</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={selectBusRoute}
+          label="Routes"
+          onChange={handleChange}
+        >
+          {busRoutes.map((route) => (
+            <MenuItem value={route.Route}>{route.Description}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </Box>
   );
 };
 
 export default BusRoutes;
+
