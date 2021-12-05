@@ -15,10 +15,9 @@ const BusRoutes = () => {
     getBusRoutes();
   }, []);
 
-  // const [busRoute, setBusRoute] = useState([]);
   const dispatch = useDispatch();
   const [selectBusRoute, setSelectBusRoute] = useState([]);
-  const busRoutes = useSelector((store) => store.busRoutesReducer);
+  const busRoutes = useSelector((store) => store.getBusRoutesReducer);
 
   const API_URI = "http://localhost:5000";
 
@@ -44,26 +43,26 @@ const BusRoutes = () => {
     dispatch({ type: "SET_BUS_ROUTE", payload: e.target.value });
   };
 
-  console.log(busRoutes);
+  console.log(setSelectBusRoute);
   console.log(selectBusRoute);
 
   return (
     <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Select Route</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={selectBusRoute}
-          label="Routes"
-          onChange={handleChange}
-        >
-          {busRoutes.map((route) => (
-            <MenuItem value={route.Route}>{route.Description}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </Box>
+       <FormControl fullWidth>
+         <InputLabel id="demo-simple-select-label">Select Route</InputLabel>
+         <Select
+           labelId="demo-simple-select-label"
+           id="demo-simple-select"
+           value={selectBusRoute}
+           label="Routes"
+           onChange={handleChange}
+         >
+           {busRoutes.map((route) => (
+             <MenuItem value={route.Route}>{route.Description}</MenuItem>
+           ))}
+         </Select>
+       </FormControl>
+     </Box>
   );
 };
 

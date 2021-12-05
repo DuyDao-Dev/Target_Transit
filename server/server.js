@@ -14,7 +14,7 @@ app.use(function(req, res, next) {
 
 // Route includes
 const busRoutesRouter = require('./routes/busRoutes.router');
-// const busDirectionRouter = require('./routes/busDirection.router');
+const busDirectionRouter = require('./routes/busDirection.router');
 // const displayStopsRouter = require('./routes/displayStops.router');
 
 
@@ -32,7 +32,7 @@ const PORT = process.env.PORT || 5000;
 
 /* Routes */
 app.use('/api/busRoutes', busRoutesRouter);
-// app.use('/api/busDirection', busDirectionRouter);
+app.use('/api/busDirection', busDirectionRouter);
 // app.use("/api/displayStops", displayStopsRouter);
 
 /** Listen * */

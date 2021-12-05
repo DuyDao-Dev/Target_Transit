@@ -1,5 +1,6 @@
 import BusRoutes from '../BusRoutes/BusRoutes';
 import './App.css';
+import BusDirection from '../BusDirection/BusDirection';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
         Target Transit
       </header>
       <BusRoutes />
+      <BusDirection />
     </div>
   );
 }
