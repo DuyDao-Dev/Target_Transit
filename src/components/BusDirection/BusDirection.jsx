@@ -1,37 +1,33 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import React from "react";
-// import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-// import * as React from "react";
 
-const BusRoutes = () => {
-  useEffect(() => {
+const BusDirection = () => {
+  
+     const setBusRoutesReducer = useSelector((store) => store.setBusRoutesReducer);
+    
+     useEffect(() => {
     getBusDirection();
-  }, []);
+  }, [setBusRoutesReducer]); //Figured out it was not calling this state on load so the URL was not passing the selected route to Directions router
 
   const dispatch = useDispatch();
   const [selectBusDirection, setSelectBusDirection] = useState('');
   const setBusDirection = useSelector((store) => store.getBusDirectionReducer);
-  const setBusRoutesReducer = useSelector((store) => store.setBusRoutesReducer);
+ 
   console.log("setBusRoutesReducer", setBusRoutesReducer); //Data is correct when selecting a bus route
 
   const API_URI = "http://localhost:5000";
-  const selectedBusRoute = `${API_URI}/api/busRoutes/directions/${setBusRoutesReducer}`;
-  console.log(selectedBusRoute);
 
 
   const getBusDirection = () => {
     axios({
       method: "GET",
-    //   url: selectedBusRoute, //This does not work
-      //url: `${API_URI}/api/busRoutes/directions/${setBusRoutesReducer}`, //This one doesn't seem to work
-        url: `${API_URI}/api/busRoutes/directions/2`, //seems to work when hardcorded
+        url: `${API_URI}/api/busRoutes/directions/${setBusRoutesReducer}`, //This one doesn't seem to work
     })
       .then((response) => {
         console.log(response.data);
@@ -72,5 +68,5 @@ const BusRoutes = () => {
   );
 };
 
-export default BusRoutes;
+export default BusDirection;
 

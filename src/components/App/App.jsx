@@ -1,6 +1,7 @@
-import BusRoutes from '../BusRoutes/BusRoutes';
 import './App.css';
+import BusRoutes from '../BusRoutes/BusRoutes';
 import BusDirection from '../BusDirection/BusDirection';
+import BusStops from '../DisplayStops/DisplayStops';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       </header>
       <BusRoutes />
       <BusDirection />
+      <BusStops />
     </div>
   );
 }
