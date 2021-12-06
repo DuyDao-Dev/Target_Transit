@@ -1,6 +1,5 @@
 import axios from "axios";
 import React from "react";
-// import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
@@ -8,7 +7,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-// import * as React from "react";
 
 const BusRoutes = () => {
   useEffect(() => {
@@ -16,7 +14,7 @@ const BusRoutes = () => {
   }, []);
 
   const dispatch = useDispatch();
-  const [selectBusRoute, setSelectBusRoute] = useState([]);
+  const [selectBusRoute, setSelectBusRoute] = useState("");
   const busRoutes = useSelector((store) => store.getBusRoutesReducer);
 
   const API_URI = "http://localhost:5000";
@@ -39,11 +37,14 @@ const BusRoutes = () => {
   };
 
   const handleChange = (e) => {
+    console.log("What is e?",e);
     setSelectBusRoute(e.target.value);
+    console.log(e.target.value);
+    console.log("What is happening in BusRoutes SET_BUS_ROUTE", selectBusRoute);
     dispatch({ type: "SET_BUS_ROUTE", payload: e.target.value });
+    console.log(selectBusRoute);
   };
 
-  console.log(setSelectBusRoute);
   console.log(selectBusRoute);
 
   return (

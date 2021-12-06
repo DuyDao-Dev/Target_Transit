@@ -18,13 +18,20 @@ const BusRoutes = () => {
   const dispatch = useDispatch();
   const [selectBusDirection, setSelectBusDirection] = useState([]);
   const setBusDirection = useSelector((store) => store.getBusDirectionReducer);
+  const setBusRoutesReducer = useSelector((store) => store.setBusRoutesReducer);
+  console.log("setBusRoutesReducer", setBusRoutesReducer); //Data is correct when selecting a bus route
 
   const API_URI = "http://localhost:5000";
+  const selectedBusRoute = `${API_URI}/api/busRoutes/directions/${setBusRoutesReducer}`;
+  console.log(selectedBusRoute);
+
 
   const getBusDirection = () => {
     axios({
       method: "GET",
-      url: `${API_URI}/api/busRoutes/directions`,
+      url: selectedBusRoute, //This does not work
+      //url: `${API_URI}/api/busRoutes/directions/${setBusRoutesReducer}`, //This one doesn't seem to work
+        // url: `${API_URI}/api/busRoutes/directions/2`, //seems to work when hardcorded
     })
       .then((response) => {
         console.log(response.data);
@@ -40,10 +47,9 @@ const BusRoutes = () => {
 
   const handleChange = (e) => {
     setSelectBusDirection(e.target.value);
-    dispatch({ type: "SET_BUS_DIRECTION", payload: e.target.value });
+    dispatch({ type: "SET_BUS_DIRECTION", payload: selectBusDirection });
   };
 
-  console.log(setSelectBusDirection);
   console.log(selectBusDirection);
 
   return (

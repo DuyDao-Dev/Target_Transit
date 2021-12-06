@@ -11,15 +11,15 @@ import { Provider } from "react-redux";
 //Reducers
 const getBusRoutesReducer = (state = [], action) => {
   if (action.type === "GET_BUS_ROUTES") {
-    console.log("This busRoutesReducer" + action.payload);
+    console.log("This busRoutesReducer", action.payload);
     return action.payload;
   }
   return state;
 };
 
-const setBusRoutesReducer = (state = [], action) => {
-  if (action.type === "SET_BUS_ROUTES") {
-    console.log("This setBusRoutesReducer" + action.payload);
+const setBusRoutesReducer = (state = (''), action) => {
+  if (action.type === "SET_BUS_ROUTE") {
+    console.log("This setBusRoutesReducer", action.payload);
     return action.payload;
   }
   return state;
@@ -27,7 +27,7 @@ const setBusRoutesReducer = (state = [], action) => {
 
 const getBusDirectionReducer = (state = [], action) => {
   if (action.type === "GET_BUS_DIRECTION") {
-    console.log("This getBusDirectionReducer" + action.payload);
+    console.log("This getBusDirectionReducer", action.payload);
     return action.payload;
   }
   return state;

@@ -16,6 +16,7 @@ router.get("/getAllRoutes", (req, res) => {
 
 //Returns possible Directions after user selects a route from Frontend.
 router.get("/directions/:route", (req, res) => {
+  console.log(req);
     const ROUTE = req.params.route;
     axios
       .get(`http://svc.metrotransit.org/NexTrip/Directions/${ROUTE}?format=json`)
