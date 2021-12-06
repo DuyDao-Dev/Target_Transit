@@ -16,7 +16,7 @@ const BusRoutes = () => {
   }, []);
 
   const dispatch = useDispatch();
-  const [selectBusDirection, setSelectBusDirection] = useState([]);
+  const [selectBusDirection, setSelectBusDirection] = useState('');
   const setBusDirection = useSelector((store) => store.getBusDirectionReducer);
   const setBusRoutesReducer = useSelector((store) => store.setBusRoutesReducer);
   console.log("setBusRoutesReducer", setBusRoutesReducer); //Data is correct when selecting a bus route
@@ -29,9 +29,9 @@ const BusRoutes = () => {
   const getBusDirection = () => {
     axios({
       method: "GET",
-      url: selectedBusRoute, //This does not work
+    //   url: selectedBusRoute, //This does not work
       //url: `${API_URI}/api/busRoutes/directions/${setBusRoutesReducer}`, //This one doesn't seem to work
-        // url: `${API_URI}/api/busRoutes/directions/2`, //seems to work when hardcorded
+        url: `${API_URI}/api/busRoutes/directions/2`, //seems to work when hardcorded
     })
       .then((response) => {
         console.log(response.data);
@@ -47,7 +47,7 @@ const BusRoutes = () => {
 
   const handleChange = (e) => {
     setSelectBusDirection(e.target.value);
-    dispatch({ type: "SET_BUS_DIRECTION", payload: selectBusDirection });
+    dispatch({ type: "SET_BUS_DIRECTION", payload: e.target.value });
   };
 
   console.log(selectBusDirection);
@@ -64,7 +64,7 @@ const BusRoutes = () => {
            onChange={handleChange}
          >
            {setBusDirection.map((route) => (
-             <MenuItem value={route.Direction}>{route.Direction}</MenuItem>
+             <MenuItem value={route.Value}>{route.Text}</MenuItem>
            ))}
          </Select>
        </FormControl>
