@@ -17,7 +17,7 @@ const getBusRoutesReducer = (state = [], action) => {
   return state;
 };
 
-const setBusRoutesReducer = (state = (''), action) => {
+const setBusRouteReducer = (state = (''), action) => {
   if (action.type === "SET_BUS_ROUTE") {
     console.log("This setBusRoutesReducer", action.payload);
     return action.payload;
@@ -33,9 +33,33 @@ const getBusDirectionReducer = (state = [], action) => {
   return state;
 };
 
-const setBusDirectionReducer = (state = [], action) => {
+const setBusDirectionReducer = (state = (''), action) => {
   if (action.type === "SET_BUS_DIRECTION") {
     console.log("This setBusDirectionReducer" + action.payload);
+    return action.payload;
+  }
+  return state;
+};
+
+const getBusStopReducer = (state = [], action) => {
+  if (action.type === "GET_BUS_STOPS") {
+    console.log("This getBusDirectionReducer", action.payload);
+    return action.payload;
+  }
+  return state;
+};
+
+const setBusStopReducer = (state = (''), action) => {
+  if (action.type === "SET_BUS_DIRECTION") {
+    console.log("This setBusStopReducer" + action.payload);
+    return action.payload;
+  }
+  return state;
+};
+
+const getAllInfoReducer = (state = [], action) => {
+  if (action.type === "GET_ALL_INFO") {
+    console.log("This getAllInfoReducer", action.payload);
     return action.payload;
   }
   return state;
@@ -46,9 +70,12 @@ const store = createStore(
   // tells the saga middleware to use the rootReducer
   // rootSaga contains all of our other reducers
   getBusRoutesReducer,
-  setBusRoutesReducer,
+  setBusRouteReducer,
   getBusDirectionReducer,
   setBusDirectionReducer,
+  getBusStopReducer,
+  setBusStopReducer,
+  getAllInfoReducer,
   }),
   applyMiddleware(logger)
 );

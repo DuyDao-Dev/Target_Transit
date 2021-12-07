@@ -60,4 +60,21 @@ router.get("/directions/:route", (req, res) => {
       });
   });
   
+  //This router will get the user's route, direction, and stop and display the times
+  router.get("/getAllInfo/:route/:direction/:stop", (req, res) => {
+    const ROUTE = req.params.route;
+    const DIRECTION = req.params.direction;
+    const STOPID = req.params.stop;
+    axios
+      .get(
+        ` http://svc.metrotransit.org/NexTrip/${ROUTE}/${DIRECTION}/${STOPID}?format=json`
+      )
+      .then((response) => {
+        res.send(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
+
 module.exports = router;

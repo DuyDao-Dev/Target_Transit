@@ -7,7 +7,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-
 const BusRoutes = () => {
   useEffect(() => {
     getBusRoutes();
@@ -37,7 +36,6 @@ const BusRoutes = () => {
   };
 
   const handleChange = (e) => {
-    console.log("What is e?",e);
     setSelectBusRoute(e.target.value);
     console.log(e.target.value);
     console.log("What is happening in BusRoutes SET_BUS_ROUTE", selectBusRoute);
@@ -49,23 +47,22 @@ const BusRoutes = () => {
 
   return (
     <Box sx={{ minWidth: 120 }}>
-       <FormControl fullWidth>
-         <InputLabel id="demo-simple-select-label">Select Route</InputLabel>
-         <Select
-           labelId="demo-simple-select-label"
-           id="demo-simple-select"
-           value={selectBusRoute}
-           label="Routes"
-           onChange={handleChange}
-         >
-           {busRoutes.map((route) => (
-             <MenuItem value={route.Route}>{route.Description}</MenuItem>
-           ))}
-         </Select>
-       </FormControl>
-     </Box>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Select Route</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={selectBusRoute}
+          label="Routes"
+          onChange={handleChange}
+        >
+          {busRoutes.map((route) => (
+            <MenuItem value={route.Route}>{route.Description}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </Box>
   );
 };
 
 export default BusRoutes;
-

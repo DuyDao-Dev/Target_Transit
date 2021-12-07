@@ -2,6 +2,7 @@ import './App.css';
 import BusRoutes from '../BusRoutes/BusRoutes';
 import BusDirection from '../BusDirection/BusDirection';
 import BusStops from '../DisplayStops/DisplayStops';
+import DisplayAllInfo from '../DisplayAllInfo/DisplayAllInfo';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <BusRoutes />
       <BusDirection />
       <BusStops />
+      <DisplayAllInfo />
     </div>
   );
 }

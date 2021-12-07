@@ -8,32 +8,32 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 const BusStops = () => {
-  
-     const setBusRoutesReducer = useSelector((store) => store.setBusRoutesReducer);
-    
-     useEffect(() => {
+  const setBusRouteReducer = useSelector((store) => store.setBusRouteReducer);
+  const setBusDirectionReducer = useSelector(
+    (store) => store.setBusDirectionReducer
+  );
+
+  useEffect(() => {
     getBusStops();
-  }, [setBusRoutesReducer, setBusDirectionReducer]);
+  }, [setBusRouteReducer, setBusDirectionReducer]);
 
   const dispatch = useDispatch();
-  const [selectBusDirection, setSelectBusDirection] = useState('');
-  const setBusDirection = useSelector((store) => store.getBusDirectionReducer);
-  const setBusDirectionReducer = useSelector((store) => store.setBusDirectionReducer);
- 
-  console.log("setBusRoutesReducer", setBusRoutesReducer); //Data is correct when selecting a bus route
+  const [selectBusStop, setSelectBusStop] = useState("");
+  const busStops = useSelector((store) => store.getBusStopReducer);
+
+  console.log("setBusStopsReducer", setBusRouteReducer); //Data is correct when selecting a bus stop
 
   const API_URI = "http://localhost:5000";
-
 
   const getBusStops = () => {
     axios({
       method: "GET",
-        url: `${API_URI}/api/busRoutes/directions/${setBusRoutesReducer}/${setBusDirectionReducer}`, //This one doesn't seem to work
+      url: `${API_URI}/api/busRoutes/allStops/${setBusRouteReducer}/${setBusDirectionReducer}`, //This one doesn't seem to work
     })
       .then((response) => {
         console.log(response.data);
         dispatch({
-          type: "GET_BUS_DIRECTION",
+          type: "GET_BUS_STOPS",
           payload: response.data,
         });
       })
@@ -43,31 +43,30 @@ const BusStops = () => {
   };
 
   const handleChange = (e) => {
-    setSelectBusDirection(e.target.value);
-    dispatch({ type: "SET_BUS_DIRECTION", payload: e.target.value });
+    setSelectBusStop(e.target.value);
+    dispatch({ type: "GET_ALL_INFO", payload: e.target.value });
   };
 
-  console.log(selectBusDirection);
+  console.log(selectBusStop);
 
   return (
     <Box sx={{ minWidth: 120 }}>
-       <FormControl fullWidth>
-         <InputLabel id="demo-simple-select-label">Select Direction</InputLabel>
-         <Select
-           labelId="demo-simple-select-label"
-           id="demo-simple-select"
-           value={selectBusDirection}
-           label="Routes"
-           onChange={handleChange}
-         >
-           {setBusDirection.map((route) => (
-             <MenuItem value={route.Value}>{route.Text}</MenuItem>
-           ))}
-         </Select>
-       </FormControl>
-     </Box>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Select Stop</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={selectBusStop}
+          label="Routes"
+          onChange={handleChange}
+        >
+          {busStops.map((stop) => (
+            <MenuItem value={stop.Value}>{stop.Text}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </Box>
   );
 };
 
 export default BusStops;
-
