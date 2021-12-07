@@ -46,9 +46,7 @@ router.get("/directions/:route", (req, res) => {
   });
   
   //Once user selects a stop, this router will get all times from the API
-  router.get("/displayBus/:route/:direction/:stop", (req, res) => {
-    // const ROUTE = req.params.route;
-    // const DIRECTION = req.params.direction;
+  router.get("/displayBus/:stop", (req, res) => {
     const STOPID = req.params.stop;
     axios
       .get(` http://svc.metrotransit.org/NexTrip/${STOPID}?format=json`)
@@ -64,12 +62,14 @@ router.get("/directions/:route", (req, res) => {
   router.get("/getAllInfo/:route/:direction/:stop", (req, res) => {
     const ROUTE = req.params.route;
     const DIRECTION = req.params.direction;
-    const STOPID = req.params.stop;
+    const STOP = req.params.stop;
+    console.log("What is req.params from getAllInfo", req.params)
     axios
       .get(
-        ` http://svc.metrotransit.org/NexTrip/${ROUTE}/${DIRECTION}/${STOPID}?format=json`
+        ` http://svc.metrotransit.org/NexTrip/${ROUTE}/${DIRECTION}/${STOP}?format=json`
       )
       .then((response) => {
+        console.log(response.data);
         res.send(response.data);
       })
       .catch((error) => {

@@ -44,7 +44,7 @@ const BusStops = () => {
 
   const handleChange = (e) => {
     setSelectBusStop(e.target.value);
-    dispatch({ type: "GET_ALL_INFO", payload: e.target.value });
+    dispatch({ type: "SET_BUS_STOP", payload: e.target.value });
   };
 
   console.log(selectBusStop);
@@ -60,8 +60,10 @@ const BusStops = () => {
           label="Routes"
           onChange={handleChange}
         >
-          {busStops.map((stop) => (
-            <MenuItem value={stop.Value}>{stop.Text}</MenuItem>
+          {busStops.map((stop, index) => (
+            <MenuItem key={index} value={stop.Value}>
+              {stop.Text}
+            </MenuItem>
           ))}
         </Select>
       </FormControl>

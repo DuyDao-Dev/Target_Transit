@@ -50,7 +50,7 @@ const getBusStopReducer = (state = [], action) => {
 };
 
 const setBusStopReducer = (state = (''), action) => {
-  if (action.type === "SET_BUS_DIRECTION") {
+  if (action.type === "SET_BUS_STOP") {
     console.log("This setBusStopReducer" + action.payload);
     return action.payload;
   }
